@@ -5,9 +5,9 @@ import curses
 from random import randint
 import signal
 
-HOST = "192.168.42.195" #input("Enter host IP:\n")
-PORT = 1255 #int( input("Enter port:\n") )
-FILES_PORT = 3461o
+HOST = "10.0.254.249" #input("Enter host IP:\n")
+PORT = 1201 #int( input("Enter port:\n") )
+FILES_PORT = 3401
 USERNAME = input("Username: ")
 BUFFER_SIZE = 8192
 MAX_COLOR = 0
@@ -57,7 +57,7 @@ def getMessage(stdscr):
 	return promptInput(stdscr)
 
 def promptInput(stdscr):
-	ERASE = 263
+	ERASE = 127
 	chars = []
 	while True:
 		currentChar = stdscr.getch()
@@ -65,7 +65,7 @@ def promptInput(stdscr):
 			break
 		elif currentChar == ERASE:
 			chars = eraseCharacter(stdscr,chars)
-		else:
+		elif(len(chars) < stdscr.getmaxyx()[1] - 6):
 			chars.append(chr(currentChar))
 			stdscr.addch(currentChar)
 	return "".join(chars)
